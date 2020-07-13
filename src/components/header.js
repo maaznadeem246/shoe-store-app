@@ -106,10 +106,15 @@ const useStyles = makeStyles((theme) => ({
       width: '20ch',
     },
   },
+  sectionCartHam:{
+    display:'flex',
+  },
   sectionDesktop: {
-    display: 'none',
+    // display: 'none',
+    display: 'flex',
+
     [theme.breakpoints.up('sm')]: {
-      display: 'flex',
+      
     },
   },
   sectionMobile: {
@@ -207,14 +212,6 @@ export default function Header() {
     <div className={classes.grow}>
       <AppBar className={classes.header} position="static">
         <Toolbar className={classes.headerToolbar}>
-          {/* <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton> */}
           <Typography className={classes.title} variant="h6" noWrap>
             Shoe Store
           </Typography>
@@ -250,7 +247,7 @@ export default function Header() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div> */}
-
+          <div className={classes.sectionCartHam}>
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -273,7 +270,18 @@ export default function Header() {
               <AccountCircle />
             </IconButton> */}
           </div>
-          <div className={classes.sectionMobile}>
+          <div>
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="open drawer"
+              >
+                <MenuIcon />
+              </IconButton>
+          </div>
+          </div>
+          {/* <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
@@ -283,7 +291,7 @@ export default function Header() {
             >
               <MoreIcon />
             </IconButton>
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
