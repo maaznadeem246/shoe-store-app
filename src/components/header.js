@@ -20,6 +20,8 @@ import { Search as SearchIcon,
         MoreVert as MoreIcon,
         Menu as MenuIcon,
         ShoppingCart,
+        ClassSharp,
+        Close as CloseIcon 
     } from '@material-ui/icons';
 
 
@@ -45,22 +47,54 @@ const useStyles = makeStyles((theme) => ({
         color:'#424242',
         paddingRight:10,
         paddingLeft:10,
+        fontSize:18,
+        borderBottom: `1px solid transparent`,
         '&:hover':{
-
+          borderBottom: `1px solid #424242`
         },
         '&:active': {
-            borderBottom: `1px solid #424242`
+
         }
     
     },
     headerLinks:{
-
+      [theme.breakpoints.down('sm')]: {
+        display:'none'
+      },  
     },
   grow: {
     flexGrow: 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  mobileMen:{
+    position:'absolute',
+    width:'100%',
+    height:'100%',
+    backgroundColor:'white',
+    zIndex:7,
+    textAlign:'center'
+  },
+  mobileHeaderLinkText:{
+    fontSize:23,
+    paddingTop:10,
+    paddingBottom:10,
+    color: '#424242',
+
+  },
+  mobileLinks:{
+    textDecoration: 'none',
+    paddingTop:10,
+    paddingBottom:10,
+  },
+  mobilelinkDiv:{
+    height:'100%',
+    paddginTop:'10%',
+  },
+  closeButton:{
+    textAlign: 'right',
+    padding:20,
   },
   title: {
    
@@ -109,6 +143,13 @@ const useStyles = makeStyles((theme) => ({
   sectionCartHam:{
     display:'flex',
   },
+  ham:{
+    display:'none',
+
+    [theme.breakpoints.down('sm')]: {
+      display:'block'
+    },
+  },
   sectionDesktop: {
     // display: 'none',
     display: 'flex',
@@ -123,6 +164,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+
 }));
 
 export default function Header() {
@@ -140,6 +182,7 @@ export default function Header() {
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
+
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -168,7 +211,32 @@ export default function Header() {
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
-    <Menu
+   <div className={classes.mobileMen}>
+          <div className={classes.closeButton}>
+            <IconButton onClick={() => handleMobileMenuClose()}>
+                <CloseIcon />
+            </IconButton>
+          </div>
+          <div className={classes.mobilelinkDiv}>
+        <Link to="/" className={classes.mobileLinks} onClick={() => handleMobileMenuClose()}>
+                <Typography className={classes.mobileHeaderLinkText} >
+                    Home
+                </Typography>
+              </Link>                
+        
+      <Link to="/newreleases" className={classes.mobileLinks} onClick={() => handleMobileMenuClose()}>
+                <Typography className={classes.mobileHeaderLinkText} >
+                  New Releases
+                </Typography>
+            </Link>
+       
+      <Link to="/sale" className={classes.mobileLinks} onClick={() => handleMobileMenuClose()}>
+                <Typography className={classes.mobileHeaderLinkText} >
+                  Sale
+                </Typography>
+            </Link>
+      </div>
+   {/* <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={mobileMenuId}
@@ -204,11 +272,13 @@ export default function Header() {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
-    </Menu>
+    </Menu> */}
+    </div>
   );
 
   return (
       <ThemeProvider theme={theme}>
+      {isMobileMenuOpen && renderMobileMenu}
     <div className={classes.grow}>
       <AppBar className={classes.header} position="static">
         <Toolbar className={classes.headerToolbar}>
@@ -270,12 +340,13 @@ export default function Header() {
               <AccountCircle />
             </IconButton> */}
           </div>
-          <div>
+          <div className={classes.ham}>
               <IconButton
                 edge="start"
                 className={classes.menuButton}
                 color="inherit"
                 aria-label="open drawer"
+                  onClick={(e) => handleMobileMenuOpen(e)}
               >
                 <MenuIcon />
               </IconButton>
@@ -294,7 +365,7 @@ export default function Header() {
           </div> */}
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
+
       {renderMenu}
     </div>
     </ThemeProvider>

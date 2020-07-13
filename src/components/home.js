@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, Grid, Typography  }from '@material-ui/core/'
+import { Card, CardContent, Grid, CardMedia, Typography  }from '@material-ui/core/'
 import { makeStyles, createMuiTheme, fade } from '@material-ui/core/styles';
 
 const data ={
@@ -75,6 +75,10 @@ const useStyles = makeStyles((theme) => ({
     },
     cardContainer:{
         margin:'auto'
+    },
+    cardMediaImg:{
+        maxHeight:180,
+        
     }
 }));
 
@@ -84,17 +88,31 @@ const HomeCards = ({details, title ,classes}) => {
     const values = Object.values(details)
     return (
         <Grid container justify="center" className={classes.cardContainer} xs={11}  spacing={2} >
-            
+            <Grid item xs={12} md={12} lg={12} >
+                <Typography className={classes.cardMainlinks}> {title} </Typography>
+            </Grid>            
             { keys.map((v,i)=>(
-                <Grid xs={12} md={3} lg={3} item >
+                <Grid xs={12} md={4} lg={4} item >
                     <Card>
-                        { v}
+                        <CardMedia
+                            component="img"
+                            className={classes.cardMediaImg}
+                            src={values[i].imgAdd}
+                            title="Paella dish"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h4">
+                                {values[i].name}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                {values[i].price}
+                            </Typography>
+                        </CardContent>
+
                     </Card>
                 </Grid>
             ))}
-            <Grid item xs={12} md={3} lg={3} >
-                <Typography className={classes.cardMainlinks}> {title} </Typography>
-            </Grid>
+
         </Grid>
         
     )
