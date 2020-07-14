@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   mobileMen:{
-    position:'absolute',
+    position:'fixed',
     width:'100%',
     height:'100%',
     backgroundColor:'white',
