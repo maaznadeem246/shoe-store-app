@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     width:'100%',
     height:'100%',
     backgroundColor:'white',
-    zIndex:7,
+    zIndex: 1200,
     textAlign:'center'
   },
   mobileHeaderLinkText:{
