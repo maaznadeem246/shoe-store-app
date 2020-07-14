@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor:'#fafafa',
         color: '#424242'
     },
+
     headerToolbar:{
         display: 'flex',
         justifyContent: 'space-around',
@@ -286,7 +287,7 @@ export default function Header() {
       <ThemeProvider theme={theme}>
       {isMobileMenuOpen && renderMobileMenu}
     <div className={classes.grow}>
-      <AppBar className={classes.header} position="static">
+      <AppBar  className={classes.header} position="fixed">
         <Toolbar className={classes.headerToolbar}>
             <Link to="/" style={{textDecorationLine:'none', color:'inherit'}}>
               <Typography className={classes.title} variant="h6" noWrap>

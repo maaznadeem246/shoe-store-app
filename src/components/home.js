@@ -67,7 +67,7 @@ const data ={
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        paddingTop: 30,
+        paddingTop: 60,
         paddingBottom: 30,
         
     },
@@ -95,7 +95,9 @@ const useStyles = makeStyles((theme) => ({
     },
     cardMediaImg:{
         maxHeight:200,
-        
+        [theme.breakpoints.only('sm')]: {
+            maxHeight:140,
+        },  
     },
     linkDiv:{
         width: '100%',
@@ -133,6 +135,9 @@ const useStyles = makeStyles((theme) => ({
     },
     productName:{
         fontSize:22,
+        [theme.breakpoints.only('sm')]: {
+            fontSize:16
+        },
     },
     price: {
         fontSize: 18,
@@ -160,7 +165,7 @@ const HomeCards = ({details, title ,classes}) => {
     }
     return (
         <Grid container justify="center" className={classes.cardContainer} xs={10}  spacing={4} >
-            <Grid item xs={12} md={12} lg={12} >
+            <Grid item xs={12} sm={12} md={12} lg={12} >
                 <Typography gutterBottom variant="h5" component="h2" className={classes.cardMainlinksMobile}> 
                     {title == 'newreleases' && ' New Release '}
                     {title == 'sale' && ' Sale '}
@@ -168,7 +173,7 @@ const HomeCards = ({details, title ,classes}) => {
                 </Typography>
             </Grid>            
             { keys.map((v,i)=>(
-                <Grid xs={12} md={3} lg={3} item >
+                <Grid xs={12} sm={4} md={3} lg={3} item >
                     <Card>
                         <CardMedia
                             component="img"

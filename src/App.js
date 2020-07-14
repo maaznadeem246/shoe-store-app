@@ -14,9 +14,18 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/newreleases" element={<div>New Releases</div>} />
-          <Route path="/launch" element={<div>Launch</div>} />
-          <Route path="/sale" element={<div>Sale</div>} />
+          <Route path="newreleases"  >
+              <Route path="/" element={<div>New Releases</div>} />
+              <Route path=":productId" element={<div>Product Page</div>} />
+          </Route>
+          <Route path="launch"  >
+            <Route path="/" element={<div>Launch</div>} />
+            <Route path=":productId" element={<div>Product Page</div>} />
+          </Route>
+          <Route path="sale"  >
+            <Route path="/" element={<div>Sale</div>} />
+            <Route path=":productId" element={<div>Product Page</div>} />
+          </Route>
         </Routes>
       </Router>
     </div>
