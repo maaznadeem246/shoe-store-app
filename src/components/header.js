@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
    
-   
+
     [theme.breakpoints.up('sm')]: {
     
     },
@@ -223,12 +223,18 @@ export default function Header() {
                     Home
                 </Typography>
               </Link>                
-        
-      <Link to="/newreleases" className={classes.mobileLinks} onClick={() => handleMobileMenuClose()}>
-                <Typography className={classes.mobileHeaderLinkText} >
-                  New Releases
-                </Typography>
+
+            <Link to="/launch" className={classes.mobileLinks} onClick={() => handleMobileMenuClose()}>
+              <Typography className={classes.mobileHeaderLinkText} >
+                Launch
+                      </Typography>
             </Link>
+
+              <Link to="/newreleases" className={classes.mobileLinks} onClick={() => handleMobileMenuClose()}>
+                  <Typography className={classes.mobileHeaderLinkText} >
+                    New Releases
+                  </Typography>
+              </Link>
        
       <Link to="/sale" className={classes.mobileLinks} onClick={() => handleMobileMenuClose()}>
                 <Typography className={classes.mobileHeaderLinkText} >
@@ -282,16 +288,20 @@ export default function Header() {
     <div className={classes.grow}>
       <AppBar className={classes.header} position="static">
         <Toolbar className={classes.headerToolbar}>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Shoe Store
-          </Typography>
+            <Link to="/" style={{textDecorationLine:'none', color:'inherit'}}>
+              <Typography className={classes.title} variant="h6" noWrap>
+                Shoe Store
+             </Typography>
+            </Link> 
+          
 
           <div className={classes.headerLinks}>
-            <Link to="/">
-               <Typography className={classes.headerLinkText} >
-                        Home
+          
+                <Link to="/launch">
+                  <Typography className={classes.headerLinkText} >
+                    Launch
                 </Typography>
-            </Link> 
+                </Link> 
             <Link to="/newreleases">
                 <Typography className={classes.headerLinkText} >
                         New Releases

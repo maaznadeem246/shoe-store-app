@@ -1,6 +1,12 @@
 import React from "react";
-import { Card, CardContent, Grid, CardMedia, Typography  }from '@material-ui/core/'
+import { Card, CardContent, Grid, IconButton, CardMedia,CardActions, Button, Typography  }from '@material-ui/core/'
+import { Link } from "react-router-dom"
 import { makeStyles, createMuiTheme, fade } from '@material-ui/core/styles';
+import { useNavigate } from "react-router";
+import {
+    AddShoppingCart as  AddShoppingCartIcon
+} from '@material-ui/icons';
+
 
 const data ={
     launch:{
@@ -37,7 +43,7 @@ const data ={
             imgAdd:'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/8db79801-e5a8-4e8b-ba12-fe47d756f3f8/air-jordan-1-mid-se-mens-shoe-P7bjRV.jpg'
         }
     },
-    newrelease:{
+    newreleases:{
         'blazer-low-leather-mens-shoe-4':{
             name:'Nike Blazer Low Leather',
             price:'75',
@@ -70,29 +76,99 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
-    cardMainlinks:{
-
+    cardMainlinksMobile:{
+        display:'none',
+        [theme.breakpoints.down('sm')]: {
+            display: 'block',
+        },
+    },
+    cardMainlinksDesk:{
+        display: 'block',
+        textAlign:'center',
+        width: 'inherit',
+        [theme.breakpoints.down('sm')]: {
+            display: 'none',
+        },
     },
     cardContainer:{
         margin:'auto'
     },
     cardMediaImg:{
-        maxHeight:180,
+        maxHeight:200,
         
+    },
+    linkDiv:{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        
+        '&:hover':{
+            cursor:'pointer',
+           boxShadow:theme.shadows[2] ,
+        }
+
+    },
+    pagelinkName:{
+        fontWeight:600,
+    },
+    productsLink:{
+        textDecorationLine:'none',
+        color:'inherit',
+        display:'inlin-block',
+         alignSelf:'center',
+        border:'2px solid #424242',
+        borderRadius:10,
+        paddingTop:5,
+        paddingBottom: 5,
+        paddingRight: 10,
+        paddingLeft: 10,
+         '&:hover':{
+             backgroundColor:'#424242',
+            color:'white',
+         }
+    },
+    cardContent:{
+        paddingBottom:10,
+    },
+    productName:{
+        fontSize:22,
+    },
+    price: {
+        fontSize: 18,
+    },
+    cardActions:{
+        paddingRight:10,
+        paddingLeft: 10,
+    },
+    cardActionDiv:{
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'space-between',
+      
     }
+    
 }));
 
 
 const HomeCards = ({details, title ,classes}) => {
     const keys = Object.keys(details)
     const values = Object.values(details)
+    const naviagate  = useNavigate()
+    const navi = (title) => {
+        naviagate(title)
+    }
     return (
-        <Grid container justify="center" className={classes.cardContainer} xs={11}  spacing={2} >
+        <Grid container justify="center" className={classes.cardContainer} xs={10}  spacing={4} >
             <Grid item xs={12} md={12} lg={12} >
-                <Typography className={classes.cardMainlinks}> {title} </Typography>
+                <Typography gutterBottom variant="h5" component="h2" className={classes.cardMainlinksMobile}> 
+                    {title == 'newreleases' && ' New Release '}
+                    {title == 'sale' && ' Sale '}
+                    {title == 'launch' && ' Launch '}
+                </Typography>
             </Grid>            
             { keys.map((v,i)=>(
-                <Grid xs={12} md={4} lg={4} item >
+                <Grid xs={12} md={3} lg={3} item >
                     <Card>
                         <CardMedia
                             component="img"
@@ -100,19 +176,44 @@ const HomeCards = ({details, title ,classes}) => {
                             src={values[i].imgAdd}
                             title="Paella dish"
                         />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="h4">
-                                {values[i].name}
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                {values[i].price}
+                        <CardContent className={classes.cardContent}>
+                            
+                            <Typography className={classes.productName} >
+                                    {values[i].name}
+                                </Typography>
+                           
+                            <Typography className={classes.price} >
+                                $ {values[i].price}
                             </Typography>
                         </CardContent>
+                        <CardActions className={classes.cardActions}>
+                            <div className={classes.cardActionDiv}>
+                            <Link to={`${title}/${v}`} className={classes.productsLink}>
+                                Details
+                            </Link>
+                                <IconButton onClick={() =>{}}>
+                                    <AddShoppingCartIcon />
+                                </IconButton>
+                            </div>
 
+                        </CardActions>
                     </Card>
                 </Grid>
             ))}
-
+            <Grid xs={12} md={3} lg={3} item>
+                <div className={classes.linkDiv} onClick={() => navi(title)}>
+                <Typography gutterBottom variant="h5" component="h6" className={classes.cardMainlinksDesk}>
+                    <div>Check out more</div>
+                    
+                    <div className={classes.pagelinkName}>
+                    {title == 'newreleases' && ' New Release '}
+                    {title == 'sale' && ' Sale '}
+                    {title == 'launch' && ' Launch '}
+                    </div>
+                
+                </Typography>
+                </div>
+            </Grid>    
         </Grid>
         
     )
