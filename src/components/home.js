@@ -197,7 +197,7 @@ const HomeCards = ({details, title ,classes}) => {
                         <CardActions className={classes.cardActions}>
                             <div className={classes.cardActionDiv}>
                             <Link to={`${title}/${v}`} className={classes.productsLink}>
-                                Details 
+                                  Details 
                             </Link>
                                 <IconButton onClick={() =>{}}>
                                     <AddShoppingCartIcon />
