@@ -166,6 +166,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
+  headerBack:{
+   height: 40, width: '100%',
+    [theme.breakpoints.down('xs')]: {
+      height: 10,
+    },
+  }
+
 }));
 
 export default function Header() {
@@ -287,6 +294,7 @@ export default function Header() {
       <ThemeProvider theme={theme}>
       {isMobileMenuOpen && renderMobileMenu}
     <div className={classes.grow}>
+        <div className={classes.headerBack}></div>
       <AppBar  className={classes.header} position="fixed">
         <Toolbar className={classes.headerToolbar}>
             <Link to="/" style={{textDecorationLine:'none', color:'inherit'}}>

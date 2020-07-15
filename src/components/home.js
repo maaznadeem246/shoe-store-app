@@ -26,8 +26,9 @@ const useStyles = makeStyles((theme) => ({
     },
     cardMainlinksMobile:{
         display:'block',
-        [theme.breakpoints.down('sm')]: {
-            // display: 'block',
+        fontSize:'2rem',
+        [theme.breakpoints.down('xs')]: {
+            fontSize:'1.5rem',
         },
     },
     cardMainlinksDesk:{
@@ -111,6 +112,11 @@ const useStyles = makeStyles((theme) => ({
         width: 'inherit',
         color: '#424242',
         justifyContent: 'space-between',
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column',
+            alignItems: 'center',
+        },
+
     },
     arrowButton:{
         padding:'0px 5px 0px 5px',
@@ -125,10 +131,13 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         cursor:'pointer',
+        fontSize:'1.1rem',
         '&:hover':{
             backgroundColor: '#d3d3d33b',
-        }
-
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '0.9rem',
+        },
     }
     
 }));
@@ -145,13 +154,13 @@ const HomeCards = ({details, title ,classes}) => {
         <Grid container justify="center" className={classes.cardContainer} xs={10} sm={11}  spacing={4} >
             <Grid item xs={12} sm={12} md={12} lg={12} >
                 <div className={classes.homeDivHead}>
-                <Typography gutterBottom variant="h4" component="h2" className={classes.cardMainlinksMobile}> 
+                <Typography gutterBottom  className={classes.cardMainlinksMobile}> 
                     {title == 'newreleases' && ' New Release '}
                     {title == 'sale' && ' Sale '}
                     {title == 'launch' && ' Launch '}
                 </Typography>
                 
-                    <Typography gutterBottom variant="h6" component="h2" className={classes.homeDivHeadCheck} onClick={() => navi(title)} >
+                    <Typography gutterBottom className={classes.homeDivHeadCheck} onClick={() => navi(title)} >
                         <span>Check out More</span>
                          <IconButton className={classes.arrowButton} >
                             <ArrowForwardIosIcon />
