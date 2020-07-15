@@ -5,7 +5,7 @@ function Product(){
     let { productId} = useParams();
     return (
         <div>
-            Product {productId}
+            Product {productId} changes
         </div>
     )
 }
