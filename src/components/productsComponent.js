@@ -112,7 +112,7 @@ function  ProductsComponent({p, title, urlTitle}){
                             </CardContent>
                             <CardActions className={classes.cardActions}>
                                 <div className={classes.cardActionDiv}>
-                                    <Link to={` ${urlTitle}/${v}`} className={classes.productsLink}>
+                                    <Link to={`${v}`} className={classes.productsLink}>
                                         {/* */}
                                         Details
                             </Link>

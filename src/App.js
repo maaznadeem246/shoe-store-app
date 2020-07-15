@@ -7,6 +7,7 @@ import Home from "./components/home"
 import Launch from "./components/launch"
 import NewRelease from "./components/newRelease"
 import Sale from "./components/sale"
+import Product from "./components/product"
 import {ContextProvider} from "./context/provider"
 
 
@@ -20,15 +21,15 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="newreleases"  >
               <Route path="/" element={<NewRelease />} />
-              <Route path=":productId" element={<div>Product Page</div>} />
+            <Route path=":productId" element={<Product />} />
           </Route>
           <Route path="launch" >
             <Route path="/" element={<Launch />} />
-            <Route path=":productId" element={<div>Product Page</div>} />
+            <Route path=":productId" element={<Product />} />
           </Route>
           <Route path="sale"  >
             <Route path="/" element={<Sale />} />
-            <Route path=":productId" element={<div>Product Page</div>} />
+            <Route path=":productId" element={<Product />} />
           </Route>
         </Routes>
       </Router>
