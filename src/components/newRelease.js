@@ -4,13 +4,13 @@ import ProductsComponent from "./productsComponent"
 
 
 
-function Launch() {
+function NewRelease() {
     const { specificProducts} = useContext(Context)
-    const p = specificProducts('launch')
+    const p = specificProducts('newreleases')
 
     return (
-        <ProductsComponent p={p} title="Launch" urlTitle="launch" />
+        <ProductsComponent p={p} title="New Releases" urlTitle="newreleases" />
     )
 }
 
-export default Launch
+export default NewRelease

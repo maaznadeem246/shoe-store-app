@@ -125,18 +125,23 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     homeDivHeadCheck:{
-
-         padding:'0px 0px 0px 6px',
-        borderRadius: 5,
-        display: 'flex',
+        margin: 'auto',
+               display: 'flex',
         alignItems: 'center',
         cursor:'pointer',
         fontSize:'1.1rem',
-        '&:hover':{
-            backgroundColor: '#d3d3d33b',
-        },
+        
         [theme.breakpoints.down('xs')]: {
             fontSize: '0.9rem',
+        },
+    },
+    homeDivHeadLink:{
+        textDecorationLine: 'none', color: 'inherit', alignSelf: 'center',
+        padding: '7px 2px 7px 8px',
+        borderRadius: 5,
+        alignItems: 'center',
+        '&:hover': {
+            backgroundColor: '#d3d3d33b',
         },
     }
     
@@ -159,13 +164,14 @@ const HomeCards = ({details, title ,classes}) => {
                     {title == 'sale' && ' Sale '}
                     {title == 'launch' && ' Launch '}
                 </Typography>
-                
-                    <Typography gutterBottom className={classes.homeDivHeadCheck} onClick={() => navi(title)} >
+                    <Link to={`${title}`}  className={classes.homeDivHeadLink}>
+                    <Typography gutterBottom className={classes.homeDivHeadCheck} >
                         <span>Check out More</span>
                          <IconButton className={classes.arrowButton} >
                             <ArrowForwardIosIcon />
                         </IconButton>
-                </Typography>
+                    </Typography>
+                    </Link>
                 </div>
             </Grid>            
             { keys.map((v,i)=>(
