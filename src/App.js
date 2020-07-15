@@ -4,14 +4,16 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/header';
 import Home from "./components/home"
-
+import Launch from "./components/launch"
+import {ContextProvider} from "./context/provider"
 
 
 function App() {
   return (
-    <div >
+    <ContextProvider>
       <Router>
         <Header />
+        <div style={{height:100,width:'100%'}}></div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="newreleases"  >
@@ -19,7 +21,7 @@ function App() {
               <Route path=":productId" element={<div>Product Page</div>} />
           </Route>
           <Route path="launch" >
-            <Route path="/" element={<div>Launch</div>} />
+            <Route path="/" element={<Launch />} />
             <Route path=":productId" element={<div>Product Page</div>} />
           </Route>
           <Route path="sale"  >
@@ -28,7 +30,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
-    </div>
+    </ContextProvider>
   );
 }
 

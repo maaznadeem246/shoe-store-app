@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     
     },
     headerLinks:{
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('xs')]: {
         display:'none'
       },  
     },
@@ -147,7 +147,7 @@ const useStyles = makeStyles((theme) => ({
   ham:{
     display:'none',
 
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       display:'block'
     },
   },
