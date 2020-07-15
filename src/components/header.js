@@ -167,9 +167,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   headerBack:{
-   height: 40, width: '100%',
+   height: 60, width: '100%',
     [theme.breakpoints.down('xs')]: {
-      height: 10,
+      height: 40,
     },
   }
 

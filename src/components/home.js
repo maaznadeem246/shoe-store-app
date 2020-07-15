@@ -149,6 +149,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const HomeCards = ({details, title ,classes}) => {
+    console.log(details)
     const keys = Object.keys(details)
     const values = Object.values(details)
     const naviagate  = useNavigate()
@@ -196,7 +197,7 @@ const HomeCards = ({details, title ,classes}) => {
                         <CardActions className={classes.cardActions}>
                             <div className={classes.cardActionDiv}>
                             <Link to={`${title}/${v}`} className={classes.productsLink}>
-                                Details
+                                Details 
                             </Link>
                                 <IconButton onClick={() =>{}}>
                                     <AddShoppingCartIcon />
@@ -228,7 +229,7 @@ const HomeCards = ({details, title ,classes}) => {
 
 export default function Home(){
     const { products} = useContext(Context);
- 
+    console.log(products)
     const classes = useStyles()
     const keys = Object.keys(products)
     const values = Object.values(products)

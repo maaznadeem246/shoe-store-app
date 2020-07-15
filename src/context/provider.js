@@ -160,9 +160,27 @@ export const ContextProvider = ({ children }) => {
 
       const homeProducts = () => {
           const { launch, newreleases, sale } = state.products
-          let l = Object.values(launch).slice(0, 4)
-          let nr = Object.values(newreleases).slice(0, 4)
-          let s = Object.values(sale).slice(0, 4)
+          let lv = Object.entries(launch).slice(0, 4)
+          let nrv = Object.entries(newreleases).slice(0, 4)
+          let sv = Object.entries(sale).slice(0, 4)
+          let l = {};
+          let nr = {};
+          let s = {};
+          for (let i = 0; i < lv.length; i++) {
+              if (lv[i][0] !== undefined) {
+                  l[lv[i][0]] = lv[i][1]
+              }
+          }
+          for (let i = 0; i < nrv.length; i++) {
+              if (nrv[i][0] !== undefined) {
+                  nr[nrv[i][0]] = nrv[i][1]
+              }
+          }
+          for (let i = 0; i < sv.length; i++) {
+              if (sv[i][0] !== undefined) {
+                  s[sv[i][0]] = sv[i][1]
+              }
+          }  
           return {launch: l, newreleases:nr, sale:s}
       }
 
