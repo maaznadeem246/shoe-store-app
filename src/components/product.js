@@ -157,7 +157,7 @@ function Product(){
 
     }
     return (
-        <Grid container xs={11} sm={11} md={10} lg={10} className={classes.root} style={{ margin: 'auto', marginTop:20}} justify="center" >
+        <Grid container xs={11} sm={11} md={10} lg={10} className={classes.root} style={{ margin: 'auto', marginTop:50}} justify="center" >
 
             <Grid item xs={12} sm={7} md={7} lg={7} >
                 <div className={classes.productImgdiv}>
