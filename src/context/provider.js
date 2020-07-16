@@ -156,7 +156,7 @@ export const ContextProvider = ({ children }) => {
 
     // actions for functionality 
 
-    console.log(state.products['launch'])
+
 
       const homeProducts = () => {
           const { launch, newreleases, sale } = state.products
@@ -184,12 +184,20 @@ export const ContextProvider = ({ children }) => {
           return {launch: l, newreleases:nr, sale:s}
       }
 
+    
+
     return (
         <Context.Provider value={{
             products: homeProducts(),
             specificProducts: (p) => {
                 return state.products[p]
             },
+            getProduct: (p) => {
+                const  {launch, newreleases, sale} = state.products
+                let values = {...launch, ...newreleases, ...sale}
+             
+                return values[p]
+            }
         }}>
             {children}
         </Context.Provider>
