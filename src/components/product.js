@@ -150,12 +150,29 @@ const useStyles = makeStyles((theme) => ({
 function Product(){
     const classes = useStyles()
     let { productId} = useParams();
-    const { getProduct } = useContext(Context);
+    const { getProduct, addProdcutToCart } = useContext(Context);
     const product = getProduct(productId)
     const [quantity,setQuantity] = useState(1)
-    const quan = () => {
 
+    const addToCart = () => {
+        let v = {}
+        v[productId] = { ...product, quantity }
+        addProdcutToCart(v)
+        setQuantity(1)
     }
+
+    const quan = (sign) => {
+      
+        if (sign == '+' && quantity >= 1 && quantity <= 10){
+           
+                setQuantity(quantity + 1)
+      
+        } else if (sign == '-' && quantity > 1){
+            setQuantity(quantity - 1)
+        }
+    }
+
+    
     return (
         <Grid container xs={11} sm={11} md={10} lg={10} className={classes.root} style={{ margin: 'auto', marginTop:50}} justify="center" >
 
@@ -174,20 +191,20 @@ function Product(){
                                 <div className={classes.productPriceText}>${product.price}</div>
                             </Typography>
                             <div className={classes.quantityDiv}>
-                                    <IconButton className={classes.quantityIconButton} onClick={() => { }}>
+                            <IconButton className={classes.quantityIconButton} onClick={() => { quan('-') }}>
                                         <RemoveIcon className={classes.quantityIcon}  />
                                     </IconButton>
                                     <div className={classes.quantityValue}>
                                         {quantity}
                                     </div>
-                                    <IconButton className={classes.quantityIconButton} onClick={() => { }}>
+                            <IconButton className={classes.quantityIconButton} onClick={() => { quan('+') }}>
                                             <AddIcon className={classes.quantityIcon} />
                                     </IconButton>
                             </div>
                        
                     </div>
                     <div className={classes.addToCartDiv}>
-                        <IconButton className={classes.addToCartButton} aria-label="add to shopping cart">
+                        <IconButton className={classes.addToCartButton} onClick={() => addToCart()} aria-label="add to shopping cart">
                             <span className={classes.addToCartText}>Add to Cart</span>  <AddShoppingCartIcon />
                         </IconButton>
                     </div>

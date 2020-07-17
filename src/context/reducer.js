@@ -1,5 +1,7 @@
 export default (state, action) => {
     switch (action.type) {
+        case 'UPDATE_CART':
+            return action.payload
         // case 'DELETE_TRANSACTION':
         //     return {
         //         ...state,

@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import { Context } from "./store";
 import Reducer from "./reducer"
 
@@ -152,8 +152,8 @@ const initialState = {
 
 
 export const ContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(Reducer, initialState)
-
+    const [state,setState] = useState(initialState)
+   const [cart,dispatch] = useReducer(Reducer,{})
     // actions for functionality 
 
 
@@ -184,6 +184,32 @@ export const ContextProvider = ({ children }) => {
           return {launch: l, newreleases:nr, sale:s}
       }
 
+      const addProdcutToCart = (data) => {
+        //   console.log(data)
+
+          let carttt = {}
+          let key = Object.keys(data)[0]
+          let value = Object.values(data)[0]
+          let p = cart[key]
+        //   console.log(cart)
+        //   console.log(key)
+        //   console.log(p)
+          if(!p){
+            carttt = { ...data,...cart,}
+          }else{
+              let sp = {}
+              sp[key] = {...value,quantity:value.quantity+p.quantity} 
+            //   console.log(sp)
+            //   delete cart[key]
+              carttt = { ...cart,...sp}
+          }
+                    // carttt = { ...data,...cart,}
+          dispatch({
+                type:'UPDATE_CART',
+                payload:carttt
+          })
+      }
+
     
 
     return (
@@ -192,12 +218,14 @@ export const ContextProvider = ({ children }) => {
             specificProducts: (p) => {
                 return state.products[p]
             },
+            cart: cart,
             getProduct: (p) => {
                 const  {launch, newreleases, sale} = state.products
                 let values = {...launch, ...newreleases, ...sale}
              
                 return values[p]
-            }
+            },
+            addProdcutToCart
         }}>
             {children}
         </Context.Provider>

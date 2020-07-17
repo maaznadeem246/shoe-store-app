@@ -149,7 +149,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const HomeCards = ({details, title ,classes}) => {
-    console.log(details)
+  //  console.log(details)
     const keys = Object.keys(details)
     const values = Object.values(details)
     const naviagate  = useNavigate()
@@ -229,7 +229,7 @@ const HomeCards = ({details, title ,classes}) => {
 
 export default function Home(){
     const { products} = useContext(Context);
-    console.log(products)
+   // console.log(products)
     const classes = useStyles()
     const keys = Object.keys(products)
     const values = Object.values(products)

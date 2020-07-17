@@ -8,6 +8,7 @@ import Launch from "./components/launch"
 import NewRelease from "./components/newRelease"
 import Sale from "./components/sale"
 import Product from "./components/product"
+import Cart from "./components/cart"
 import {ContextProvider} from "./context/provider"
 
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/" element={<Sale />} />
             <Route path=":productId" element={<Product />} />
           </Route>
+          <Route path="cart" element={<Cart />} />
         </Routes>
       </Router>
     </ContextProvider>

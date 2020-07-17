@@ -1,6 +1,7 @@
-import React from "react"
+import React, {useState, useContext, useEffect} from "react"
 import {Link} from "react-router-dom"
 import { makeStyles, createMuiTheme, fade } from '@material-ui/core/styles';
+import { Context } from "../context/store"
 import { AppBar, 
         Toolbar, 
         Typography, 
@@ -171,7 +172,18 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       height: 40,
     },
-  }
+  },
+
+  cartlink:{
+    color:'inherit',
+  },
+
+  cartbadge:{
+    '&>span':{
+     backgroundColor: '#424242',
+     color:'white'
+    }
+   }
 
 }));
 
@@ -179,9 +191,18 @@ export default function Header() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const [productQnty, setProductQnty] = useState(0);
+  const { cart } = useContext(Context)
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  useEffect(() => {
+   let qnty = Object.values(cart).length
+  
+   setProductQnty(qnty)
+  },[cart]);
+
+
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -338,11 +359,13 @@ export default function Header() {
           </div> */}
           <div className={classes.sectionCartHam}>
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <ShoppingCart/>
-              </Badge>
-            </IconButton>
+            <Link to="cart" className={classes.cartlink}>
+              <IconButton aria-label="show 4 new mails" color="inherit">
+                <Badge badgeContent={productQnty} className={classes.cartbadge} color="default">
+                  <ShoppingCart/>
+                </Badge>
+              </IconButton>
+            </Link>
             {/* <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
