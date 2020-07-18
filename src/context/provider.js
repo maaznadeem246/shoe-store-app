@@ -153,7 +153,20 @@ const initialState = {
 
 export const ContextProvider = ({ children }) => {
     const [state,setState] = useState(initialState)
-   const [cart,dispatch] = useReducer(Reducer,{})
+   const [cart,dispatch] = useReducer(Reducer,{
+       'air-jordan-1-mid-shoe-1': {
+           name: 'Air Jordan 1 Mid',
+           price: '115',
+           quantity:2,
+           imgAdd: 'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/i1-d2f41ddc-a08e-443a-8eb0-6960ebb4a408/air-jordan-1-mid-shoe-1zMCFJ.jpg'
+       },
+       'air-jordan-1-low-shoe-za': {
+           name: 'Air Jordan 1 Low',
+           quantity: 6,
+           price: '90',
+           imgAdd: 'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/i1-483c83ff-0235-4aec-80b3-d30fdc942585/air-jordan-1-low-shoe-z3Tl2VeJ.jpg'
+       },
+   })
     // actions for functionality 
 
 

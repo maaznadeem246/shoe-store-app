@@ -3,8 +3,9 @@ import { Context } from "../context/store"
 import {
     Add as AddIcon,
     Remove as RemoveIcon,
-    AddShoppingCart as AddShoppingCartIcon,
+    DeleteForever as DeleteForeverIcon,
 } from '@material-ui/icons';
+
 
 import { 
     Grid, 
@@ -23,6 +24,7 @@ import {
     Paper,
 } from '@material-ui/core/'
 import { makeStyles } from '@material-ui/core/styles';
+import { borderBottom } from "@material-ui/system";
 
 const useStyles = makeStyles((theme) => ({
     cartHead:{
@@ -35,19 +37,22 @@ const useStyles = makeStyles((theme) => ({
     },
     cartTable:{
         padding: 20,
+        color: '#424242',
     },
     quantityDiv: {
         display: 'flex',
-        padding: 20,
+        padding: 5,
+        justifyContent:'center',
         [theme.breakpoints.down('md')]: {
 
         }
     },
     quantityIconButton: {
-        border: '2px solid #424242',
+        border: '1px solid #424242',
         paddingTop: 0,
         paddingBottom: 0,
-        height: 50,
+        height: 30,
+        width:30,
         borderRadius: 8,
         color: '#424242',
         '&:hover': {
@@ -55,14 +60,14 @@ const useStyles = makeStyles((theme) => ({
             color: 'white',
         },
         [theme.breakpoints.down('md')]: {
-            height: 40,
+        
         }
     },
     quantityIcon: {
-        fontSize: '1.8rem',
+        fontSize: '1rem',
     },
     quantityValue: {
-        fontSize: 35,
+        fontSize: 20,
         alignSelf: 'center',
         color: '#424242',
         padding: "0px 20px 0px 20px",
@@ -70,6 +75,23 @@ const useStyles = makeStyles((theme) => ({
             fontSize: 24,
         },
     },
+    cellCss:{
+        padding:3,
+        paddingTop:6,
+        textAlign:'center',
+         borderBottom: 'none',
+    },
+    cellCssHead:{
+        fontSize:16,
+        textAlign: 'center',
+        borderBottom:'4px solid #424242' ,
+    },
+    deleteIcon:{
+        fontSize: '1.8rem',
+        '&>span>svg': {
+
+        }
+    }
 }))
 
 
@@ -105,25 +127,35 @@ function Cart(){
             </Grid>
             <Grid item  container  >
                 <Grid item xs={12} sm={12} md={8} lg={8}>
-                    <TableContainer className={classes.cartTable} component={Paper}>
-                        <Table className={classes.table} aria-label="simple table">
+                    <TableContainer  className={classes.cartTable} component={Paper}>
+                        <Table size="small" className={classes.table} aria-label="cart table">
                             <TableHead>
-                                <TableRow>
-
+                                <TableRow >
+                                    <TableCell className={classes.cellCssHead}>  Image    </TableCell>
+                                    <TableCell className={classes.cellCssHead}>  Name    </TableCell>
+                                    <TableCell className={classes.cellCssHead}> Price    </TableCell>
+                                    <TableCell className={classes.cellCssHead}>  Quantity    </TableCell>
+                                    <TableCell className={classes.cellCssHead}>  Total Price   </TableCell>
+                                    <TableCell className={classes.cellCssHead}> </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {Object.entries(cart).map(v => (
                                     <TableRow key={v[0]}>
-                                        <TableCell >
+                                        <TableCell className={classes.cellCss}>
                                             <img src={v[1].imgAdd} className={classes.cartProductImg} />
                                         </TableCell>
-                                        <TableCell >
+                                        <TableCell className={classes.cellCss} >
                                             <Typography>
                                                 {v[1].name}
                                             </Typography>
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell className={classes.cellCss}>
+                                            <Typography>
+                                                {v[1].price}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell className={classes.cellCss}>
                                             <div className={classes.quantityDiv}>
                                                 <IconButton className={classes.quantityIconButton} onClick={() => { quan('-') }}>
                                                     <RemoveIcon className={classes.quantityIcon} />
@@ -136,10 +168,24 @@ function Cart(){
                                                 </IconButton>
                                             </div>
                                         </TableCell>
+                                        <TableCell className={classes.cellCss}>
+                                            <Typography>
+                                                {Number(v[1].price) * v[1].quantity}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell className={classes.cellCss}>
+                                            <IconButton className={classes.deleteIconButton} onClick={()=>{ }}>
+                                                <DeleteForeverIcon className={classes.deleteIcon} />
+                                            </IconButton>
+                                                
+                                        </TableCell>
                                         {/* <TableCell align="right">{row.calories}</TableCell> */}
 
                                     </TableRow>
                                 ))}
+                                <TableRow>
+
+                                </TableRow>
                             </TableBody>
                         </Table>
                     </TableContainer>
