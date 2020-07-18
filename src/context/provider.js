@@ -223,7 +223,23 @@ export const ContextProvider = ({ children }) => {
           })
       }
 
-    
+      const updateCart = (data) => {
+         let carttt =  { ...cart,...data }
+          dispatch({
+              type: 'UPDATE_CART',
+              payload: carttt
+          })
+      }
+
+
+      const deleteFromCart = (data) => {
+          let newCart = {...cart}
+          delete newCart[data]
+          dispatch({
+              type: 'UPDATE_CART',
+              payload: newCart
+          })
+      }
 
     return (
         <Context.Provider value={{
@@ -238,7 +254,9 @@ export const ContextProvider = ({ children }) => {
              
                 return values[p]
             },
-            addProdcutToCart
+            addProdcutToCart,
+            updateCart,
+            deleteFromCart
         }}>
             {children}
         </Context.Provider>

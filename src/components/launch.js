@@ -5,7 +5,7 @@ import ProductsComponent from "./productsComponent"
 
 
 function Launch() {
-    const { specificProducts} = useContext(Context)
+    const { specificProducts , } = useContext(Context)
     const p = specificProducts('launch')
 
     return (

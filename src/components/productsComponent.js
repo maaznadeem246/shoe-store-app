@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, Grid, IconButton, CardMedia, CardActions, Button, Typography } from '@material-ui/core'
 import { Link } from "react-router-dom"
+import { Context } from "../context/store";
 import {
     AddShoppingCart as AddShoppingCartIcon,
     ArrowForwardIos as ArrowForwardIosIcon
@@ -82,6 +83,15 @@ function  ProductsComponent({p, title, urlTitle}){
     const keys = Object.keys(p)
     const values = Object.values(p)
     const classes = useStyles()
+    const { addProdcutToCart } = useContext(Context)
+
+    const addToCart = (k, v) => {
+        let d = {}
+        d[k] = { ...v, quantity: 1 }
+        
+        addProdcutToCart(d)
+    }
+
     return (
         <div className={classes.root}>
 
@@ -116,7 +126,7 @@ function  ProductsComponent({p, title, urlTitle}){
                                         {/* */}
                                         Details
                             </Link>
-                                    <IconButton onClick={() => { }}>
+                                    <IconButton onClick={() => { addToCart(v,values[i]) }}>
                                         <AddShoppingCartIcon />
                                     </IconButton>
                                 </div>

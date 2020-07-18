@@ -148,13 +148,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const HomeCards = ({details, title ,classes}) => {
+const HomeCards = ({ details, title, classes, addProdcutToCart}) => {
   //  console.log(details)
     const keys = Object.keys(details)
     const values = Object.values(details)
     const naviagate  = useNavigate()
     const navi = (title) => {
         naviagate(title)
+    }
+    const addToCart = (k,v) => {
+        let d ={}
+        d[k] = {...v,quantity:1}
+      
+        addProdcutToCart(d)
     }
     return (
         <Grid container justify="center" className={classes.cardContainer} xs={10} sm={11}  spacing={4} >
@@ -199,7 +205,7 @@ const HomeCards = ({details, title ,classes}) => {
                             <Link to={`${title}/${v}`} className={classes.productsLink}>
                                   Details 
                             </Link>
-                                <IconButton onClick={() =>{}}>
+                                <IconButton onClick={() =>{ addToCart(v,values[i])}}>
                                     <AddShoppingCartIcon />
                                 </IconButton>
                             </div>
@@ -228,7 +234,7 @@ const HomeCards = ({details, title ,classes}) => {
 }
 
 export default function Home(){
-    const { products} = useContext(Context);
+    const { products, addProdcutToCart} = useContext(Context);
    // console.log(products)
     const classes = useStyles()
     const keys = Object.keys(products)
@@ -239,7 +245,7 @@ export default function Home(){
                  {
                     keys.map((v,i)=>(
                         
-                            <HomeCards details={values[i]} classes={classes} title={v}  />
+                        <HomeCards addProdcutToCart={addProdcutToCart} details={values[i]} classes={classes} title={v}  />
                        
                     ))   
                 }        

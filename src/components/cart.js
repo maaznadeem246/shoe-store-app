@@ -1,5 +1,6 @@
-import React, { useContext, useState} from "react"
+import React, { useContext, useEffect, useState} from "react"
 import { Context } from "../context/store"
+import Order from "./order"
 import {
     Add as AddIcon,
     Remove as RemoveIcon,
@@ -24,12 +25,14 @@ import {
     Paper,
 } from '@material-ui/core/'
 import { makeStyles } from '@material-ui/core/styles';
-import { borderBottom } from "@material-ui/system";
+
 
 const useStyles = makeStyles((theme) => ({
+   
     cartHead:{
         ...theme.typography.h4,
         color:'#424242',
+        padding: 20,
     },
     cartProductImg:{
         width:50,
@@ -38,6 +41,14 @@ const useStyles = makeStyles((theme) => ({
     cartTable:{
         padding: 20,
         color: '#424242',
+        maxHeight:700,
+        width: 'inherit',
+        boxShadow: theme.shadows[4],
+        
+        [theme.breakpoints.down('md')]: {
+            
+        }
+
     },
     quantityDiv: {
         display: 'flex',
@@ -91,42 +102,101 @@ const useStyles = makeStyles((theme) => ({
         '&>span>svg': {
 
         }
+    },
+    cartEmpty:{
+        textAlign:'center'
     }
 }))
 
 
-function Cart(){
-    const { cart } = useContext(Context)
-    const classes = useStyles();
-    console.log(cart)
-    const [quantity, setQuantity] = useState(1)
+function CartRow({ v, classes, updateCart, deleteFromCart}){
+    const [quantity, setQuantity] = useState(0)
 
 
     const quan = (sign) => {
-
+        let vv = {}
         if (sign == '+' && quantity >= 1 && quantity <= 10) {
-
-            setQuantity(quantity + 1)
+            vv[v[0]] = { ...v[1], quantity: v[1].quantity + 1  }
+            updateCart(vv)
 
         } else if (sign == '-' && quantity > 1) {
-            setQuantity(quantity - 1)
+            vv[v[0]] = { ...v[1], quantity: v[1].quantity - 1 }
+            updateCart(vv)
+           
         }
     }
 
-    // useEffect(()=>{
-    //     let v = 
-    //     setQuantity()
-    // },[cart])
+    useEffect(()=>{
+        
+        setQuantity(v[1].quantity)
+    }, [v[1].quantity])
+
 
     return (
-        <Grid container xs={11} sm={11} md={10} lg={10} className={classes.root} style={{ margin: 'auto', marginTop: 50 }} justify="center" >
+        <TableRow key={v[0]}>
+            <TableCell className={classes.cellCss}>
+                <img src={v[1].imgAdd} className={classes.cartProductImg} />
+            </TableCell>
+            <TableCell className={classes.cellCss} >
+                <Typography>
+                    {v[1].name}
+                </Typography>
+            </TableCell>
+            <TableCell className={classes.cellCss}>
+                <Typography>
+                   $ {v[1].price}
+                </Typography>
+            </TableCell>
+            <TableCell className={classes.cellCss}>
+                <div className={classes.quantityDiv}>
+                    <IconButton className={classes.quantityIconButton} onClick={() => { quan('-') }}>
+                        <RemoveIcon className={classes.quantityIcon} />
+                    </IconButton>
+                    <div className={classes.quantityValue}>
+                        {quantity}
+                    </div>
+                    <IconButton className={classes.quantityIconButton} onClick={() => { quan('+') }}>
+                        <AddIcon className={classes.quantityIcon} />
+                    </IconButton>
+                </div>
+            </TableCell>
+            <TableCell className={classes.cellCss}>
+                <Typography>
+                   $ {Number(v[1].price) * v[1].quantity}
+                </Typography>
+            </TableCell>
+            <TableCell className={classes.cellCss}>
+                <IconButton className={classes.deleteIconButton} onClick={() => { deleteFromCart(v[0]) }}>
+                    <DeleteForeverIcon className={classes.deleteIcon} />
+                </IconButton>
+
+            </TableCell>
+            {/* <TableCell align="right">{row.calories}</TableCell> */}
+
+        </TableRow>
+    )
+}
+
+
+function Cart(){
+    const { cart, updateCart, deleteFromCart } = useContext(Context)
+    const classes = useStyles();
+    
+
+    
+
+
+    return (
+        <Grid container xs={12} sm={12} md={11} lg={11} className={classes.root} style={{ margin: 'auto', marginTop: 50 }} justify="center" >
             <Grid item justify="center" >
                 <Typography className={classes.cartHead}>
                         Cart
                 </Typography>
             </Grid>
-            <Grid item  container  >
-                <Grid item xs={12} sm={12} md={8} lg={8}>
+            <Grid item container  >
+           { Object.keys(cart).length  ? 
+                <>
+                        <Grid item xs={11} sm={11} md={8} lg={8} justify="center" style={{margin:'auto'}}>
                     <TableContainer  className={classes.cartTable} component={Paper}>
                         <Table size="small" className={classes.table} aria-label="cart table">
                             <TableHead>
@@ -141,47 +211,7 @@ function Cart(){
                             </TableHead>
                             <TableBody>
                                 {Object.entries(cart).map(v => (
-                                    <TableRow key={v[0]}>
-                                        <TableCell className={classes.cellCss}>
-                                            <img src={v[1].imgAdd} className={classes.cartProductImg} />
-                                        </TableCell>
-                                        <TableCell className={classes.cellCss} >
-                                            <Typography>
-                                                {v[1].name}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell className={classes.cellCss}>
-                                            <Typography>
-                                                {v[1].price}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell className={classes.cellCss}>
-                                            <div className={classes.quantityDiv}>
-                                                <IconButton className={classes.quantityIconButton} onClick={() => { quan('-') }}>
-                                                    <RemoveIcon className={classes.quantityIcon} />
-                                                </IconButton>
-                                                <div className={classes.quantityValue}>
-                                                    {v[1].quantity}
-                                                </div>
-                                                <IconButton className={classes.quantityIconButton} onClick={() => { quan('+') }}>
-                                                    <AddIcon className={classes.quantityIcon} />
-                                                </IconButton>
-                                            </div>
-                                        </TableCell>
-                                        <TableCell className={classes.cellCss}>
-                                            <Typography>
-                                                {Number(v[1].price) * v[1].quantity}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell className={classes.cellCss}>
-                                            <IconButton className={classes.deleteIconButton} onClick={()=>{ }}>
-                                                <DeleteForeverIcon className={classes.deleteIcon} />
-                                            </IconButton>
-                                                
-                                        </TableCell>
-                                        {/* <TableCell align="right">{row.calories}</TableCell> */}
-
-                                    </TableRow>
+                                    <CartRow v={v} classes={classes} deleteFromCart={deleteFromCart} updateCart={updateCart} />
                                 ))}
                                 <TableRow>
 
@@ -190,9 +220,18 @@ function Cart(){
                         </Table>
                     </TableContainer>
                 </Grid>
-                <Grid item xs={12} sm={12} md={4} lg={4}>
-
+                <Grid item xs={12} sm={12} md={4} lg={4}  >
+                            <Order />
                 </Grid>
+            </>
+            :
+               <Grid item justify="center" xs={12} sm={12} md={12} lg={12} >
+                    <Typography className={classes.cartEmpty}>
+                         Your Cart is Empty
+                    </Typography>
+                </Grid>
+ 
+            }
             </Grid>
         </Grid>
     )
