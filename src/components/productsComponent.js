@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'block',
         fontSize: '2rem',
         textAlign: 'center',
+        color:'#424242',
         [theme.breakpoints.down('xs')]: {
             fontSize: '1.5rem',
         },

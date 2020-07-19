@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
         display:'inlin-block',
          alignSelf:'center',
         border:'2px solid #424242',
-        borderRadius:10,
+        borderRadius:6,
         paddingTop:5,
         paddingBottom: 5,
         paddingRight: 10,

@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize:18,
         borderBottom: `1px solid transparent`,
         '&:hover':{
-          borderBottom: `1px solid #424242`
+          borderBottom: `2px solid #424242`
         },
         '&:active': {
 
@@ -69,6 +69,9 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      margin:'auto',
+    },  
   },
   mobileMen:{
     position:'fixed',
@@ -99,10 +102,14 @@ const useStyles = makeStyles((theme) => ({
     padding:20,
   },
   title: {
-   
-
-    [theme.breakpoints.up('sm')]: {
-    
+      fontSize:23,
+    color: 'white',
+    backgroundColor: '#424242',
+    borderRadius:5,
+    paddingRight:8,
+    paddingLeft: 8,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 18,
     },
   },
   search: {
