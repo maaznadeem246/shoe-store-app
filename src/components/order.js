@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
     mainOrderDiv:{
         maxHeight:250,
-        overflow:'scroll',
+        overflowY:'scroll',
         paddingTop:10,
         paddingBottom: 10
     },

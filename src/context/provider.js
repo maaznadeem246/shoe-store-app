@@ -1,6 +1,9 @@
 import React, { useReducer, useState } from 'react';
 import { Context } from "./store";
 import Reducer from "./reducer"
+import { useSnackbar } from 'notistack';
+import {  IconButton } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 
 // Initial state
 const initialState = {
@@ -168,8 +171,23 @@ export const ContextProvider = ({ children }) => {
     const [state,setState] = useState(initialState)
    const [cart,dispatch] = useReducer(Reducer,{})
     // actions for functionality 
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-
+    const snackBartOptions = {
+        anchorOrigin:{
+            vertical: 'bottom',
+            horizontal: 'right',
+            },
+        maxSnack : 3,
+        action:(key)=>(
+            
+            <IconButton size="small" aria-label="close" color="inherit" onClick={() => { closeSnackbar(key) }}>
+                    <CloseIcon fontSize="small" />
+                </IconButton>
+            
+            )
+        } 
+    
 
       const homeProducts = () => {
           const { launch, newreleases, sale } = state.products
@@ -221,6 +239,7 @@ export const ContextProvider = ({ children }) => {
                 type:'UPDATE_CART',
                 payload:carttt
           })
+          enqueueSnackbar('Product has been added to the Cart !', snackBartOptions);
       }
 
       const updateCart = (data) => {
@@ -229,6 +248,7 @@ export const ContextProvider = ({ children }) => {
               type: 'UPDATE_CART',
               payload: carttt
           })
+          enqueueSnackbar('Cart has been Updated !', snackBartOptions);
       }
 
 
@@ -239,6 +259,7 @@ export const ContextProvider = ({ children }) => {
               type: 'UPDATE_CART',
               payload: newCart
           })
+          enqueueSnackbar('Product has been deleted from Cart !', snackBartOptions);
       }
 
     return (

@@ -10,11 +10,13 @@ import Sale from "./components/sale"
 import Product from "./components/product"
 import Cart from "./components/cart"
 import {ContextProvider} from "./context/provider"
-
+import { SnackbarProvider } from 'notistack';
 
 function App() {
   return (
-    <ContextProvider>
+    <SnackbarProvider>
+      <ContextProvider>
+
       <Router>
         <Header />
 
@@ -35,7 +37,9 @@ function App() {
           <Route path="cart" element={<Cart />} />
         </Routes>
       </Router>
-    </ContextProvider>
+
+      </ContextProvider>
+    </SnackbarProvider>
   );
 }
 
