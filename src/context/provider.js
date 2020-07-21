@@ -168,7 +168,7 @@ const initialState = {
 // },
 
 export const ContextProvider = ({ children }) => {
-    const [state,setState] = useState(initialState)
+    const [state] = useState(initialState)
    const [cart,dispatch] = useReducer(Reducer,{})
     // actions for functionality 
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -179,6 +179,7 @@ export const ContextProvider = ({ children }) => {
             horizontal: 'right',
             },
         maxSnack : 3,
+        autoHideDuration: 2000,
         action:(key)=>(
             
             <IconButton size="small" aria-label="close" color="inherit" onClick={() => { closeSnackbar(key) }}>

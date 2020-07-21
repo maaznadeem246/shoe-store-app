@@ -6,22 +6,14 @@ import { AppBar,
         Toolbar, 
         Typography, 
         ThemeProvider,
-        Switch,
-        FormControlLabel,
-        FormGroup,
         Badge,
-        InputBase, 
         MenuItem,
         IconButton,
         Menu
     } from '@material-ui/core';
-import { Search as SearchIcon, 
-        AccountCircle, Mail as MailIcon , 
-        Notifications as NotificationsIcon, 
-        MoreVert as MoreIcon,
+import { 
         Menu as MenuIcon,
         ShoppingCart,
-        ClassSharp,
         Close as CloseIcon 
     } from '@material-ui/icons';
 
@@ -211,9 +203,9 @@ export default function Header() {
 
 
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleProfileMenuOpen = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -245,7 +237,7 @@ export default function Header() {
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  // const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
    <div className={classes.mobileMen}>
           <div className={classes.closeButton}>

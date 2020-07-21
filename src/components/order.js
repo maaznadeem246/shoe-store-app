@@ -90,7 +90,7 @@ function Order(){
                 {
                  orderCart &&  Object.entries(orderCart).map(v=>(
                     <div className={classes.mainOrders}>
-                            <img className={classes.orderimg} src={v[1].imgAdd} />
+                            <img className={classes.orderimg} src={v[1].imgAdd} alt="Product Pic" />
                             <Typography className={classes.ordername}>{v[1].name}</Typography>
                             <Typography className={classes.orderquantity}>{v[1].quantity} Qty</Typography>
                             <Typography className={classes.orderprice}>$ {Number(v[1].price) * v[1].quantity}</Typography>

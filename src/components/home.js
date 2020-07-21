@@ -1,8 +1,8 @@
 import React, { useContext} from "react";
-import { Card, CardContent, Grid, IconButton, CardMedia,CardActions, Button, Typography  }from '@material-ui/core/'
+import { Card, CardContent, Grid, IconButton, CardMedia,CardActions,  Typography  }from '@material-ui/core/'
 import { Link } from "react-router-dom"
-import { makeStyles, createMuiTheme, fade } from '@material-ui/core/styles';
-import { useNavigate } from "react-router";
+import { makeStyles } from '@material-ui/core/styles';
+// import { useNavigate } from "react-router";
 import {Context} from "../context/store"
 import {
     AddShoppingCart as  AddShoppingCartIcon,
@@ -152,10 +152,10 @@ const HomeCards = ({ details, title, classes, addProdcutToCart}) => {
   //  console.log(details)
     const keys = Object.keys(details)
     const values = Object.values(details)
-    const naviagate  = useNavigate()
-    const navi = (title) => {
-        naviagate(title)
-    }
+    // const naviagate  = useNavigate()
+    // const navi = (title) => {
+    //     naviagate(title)
+    // }
     const addToCart = (k,v) => {
         let d ={}
         d[k] = {...v,quantity:1}
@@ -167,9 +167,9 @@ const HomeCards = ({ details, title, classes, addProdcutToCart}) => {
             <Grid item xs={12} sm={12} md={12} lg={12} >
                 <div className={classes.homeDivHead}>
                 <Typography gutterBottom  className={classes.cardMainlinksMobile}> 
-                    {title == 'newreleases' && ' New Release '}
-                    {title == 'sale' && ' Sale '}
-                    {title == 'launch' && ' Launch '}
+                    {title === 'newreleases' && ' New Release '}
+                    {title === 'sale' && ' Sale '}
+                    {title === 'launch' && ' Launch '}
                 </Typography>
                     <Link to={`${title}`}  className={classes.homeDivHeadLink}>
                     <Typography gutterBottom className={classes.homeDivHeadCheck} >

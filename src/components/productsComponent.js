@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardContent, Grid, IconButton, CardMedia, CardActions, Button, Typography } from '@material-ui/core'
+import { Card, CardContent, Grid, IconButton, CardMedia, CardActions, Typography } from '@material-ui/core'
 import { Link } from "react-router-dom"
 import { Context } from "../context/store";
 import {
     AddShoppingCart as AddShoppingCartIcon,
-    ArrowForwardIos as ArrowForwardIosIcon
 } from '@material-ui/icons';
 
 

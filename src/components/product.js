@@ -1,7 +1,7 @@
 import React, { useContext, useState} from "react"
 import { useParams } from 'react-router-dom';
 import { Context } from "../context/store";
-import { Card, CardContent, Grid, IconButton, CardMedia, CardActions, Button, Typography } from '@material-ui/core/'
+import { Grid, IconButton, Typography } from '@material-ui/core/'
 import { makeStyles} from '@material-ui/core/styles';
 import {
      Add  as AddIcon,
@@ -163,12 +163,12 @@ function Product(){
 
     const quan = (sign) => {
       
-        if (sign == '+' && quantity >= 1 && quantity <= 10){
+        if (sign === '+' && quantity >= 1 && quantity <= 10){
            
-                setQuantity(quantity + 1)
+                setQuantity(quantity => quantity + 1)
       
-        } else if (sign == '-' && quantity > 1){
-            setQuantity(quantity - 1)
+        } else if (sign === '-' && quantity > 1){
+            setQuantity(quantity => quantity - 1)
         }
     }
 
@@ -178,7 +178,7 @@ function Product(){
 
             <Grid item xs={12} sm={7} md={7} lg={7} >
                 <div className={classes.productImgdiv}>
-                    <img src={product.imgAdd} className={classes.productImg} />
+                    <img src={product.imgAdd} className={classes.productImg} alt="Product Pic" />
                 </div>     
             </Grid>
             <Grid item xs={12} sm={5} md={5} lg={5} style={{margin:'auto'}}>    

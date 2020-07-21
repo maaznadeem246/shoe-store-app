@@ -11,10 +11,6 @@ import {
 import { 
     Grid, 
     IconButton, 
-    CardMedia, 
-    CardContent, 
-    CardActions,
-    Button, 
     Typography,
     Table,
     TableBody,
@@ -115,11 +111,11 @@ function CartRow({ v, classes, updateCart, deleteFromCart}){
 
     const quan = (sign) => {
         let vv = {}
-        if (sign == '+' && quantity >= 1 && quantity <= 10) {
+        if (sign === '+' && quantity >= 1 && quantity <= 10) {
             vv[v[0]] = { ...v[1], quantity: v[1].quantity + 1  }
             updateCart(vv)
 
-        } else if (sign == '-' && quantity > 1) {
+        } else if (sign === '-' && quantity > 1) {
             vv[v[0]] = { ...v[1], quantity: v[1].quantity - 1 }
             updateCart(vv)
            
@@ -135,7 +131,7 @@ function CartRow({ v, classes, updateCart, deleteFromCart}){
     return (
         <TableRow key={v[0]}>
             <TableCell className={classes.cellCss}>
-                <img src={v[1].imgAdd} className={classes.cartProductImg} />
+                <img src={v[1].imgAdd} className={classes.cartProductImg}  alt="Product Pic" />
             </TableCell>
             <TableCell className={classes.cellCss} >
                 <Typography>
